@@ -27,12 +27,13 @@ class User extends Authenticatable
             "users.lastname"=>10,
         ]
       ];
-      
+
 
     protected $fillable = [
         'firstname',
         'lastname',
         'employee_type',
+        'comfirm_status',
         'email',
         'api_token',
         'password',

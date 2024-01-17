@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-       
+
         Schema::create('deletedjobs', function (Blueprint $table) {
             $table->id();
             $table->tinyText('job_name')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->tinyText('firstname');
             $table->tinyText('lastname')->nullable();
             $table->timestamps();

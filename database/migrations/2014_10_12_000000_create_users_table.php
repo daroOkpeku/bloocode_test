@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('firstname')->nullable();
             $table->tinyText('lastname')->nullable();
             $table->string('email')->unique()->nullable();
-            $table->integer('employee_type')->nullable(); 
+            $table->boolean('comfirm_status')->default(0)->nullable();
+            $table->integer('employee_type')->nullable();
             $table->tinyText('api_token')->nullable();
             $table->tinyText('status')->nullable();
             $table->timestamp('email_verified_at')->nullable();

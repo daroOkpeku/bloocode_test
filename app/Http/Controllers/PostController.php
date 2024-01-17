@@ -25,6 +25,7 @@ class PostController extends Controller
             'lastname'=>$request->lastname,
             'email'=>$request->email,
             'employee_type'=>1,
+            'comfirm_status'=>1,
             'status'=>'hired',
             'password'=>Hash::make($request->password)
         ]);
@@ -72,7 +73,7 @@ class PostController extends Controller
                     'employee_type'=>2,
                     'status'=>'hired',
                 ]);
-               event(new userevent($user->firstname, $user->lastname, $user->email));  
+               event(new userevent($user->firstname, $user->lastname, $user->email));
                $message ='you have create a user and assigned a role';
                $code = 200;
                $status = true;
@@ -82,20 +83,25 @@ class PostController extends Controller
                 $code = 403;
                 $status = false;
                 $user->res($message, $code, $status);
-            }      
+            }
            }
 
-            
+
            public function user_verify($email, Request $request, User $user){
               try {
-                $user->where(['email'=>$email])->first();  
-                if($user){
+                $user->where(['email'=>$email])->first();
+                if($user && $user->comfirm_status == 0){
                   $user->password = Hash::make($request->password);
+                  $user->comfirm_status = 1;
                   $user->save();
                   $message ='you have verified and created your email';
                   $code = 200;
                   $status = true;
                   $user->res($message, $code, $status);
+                }else{
+                    $message ='your email has been approved before';
+                  $code = 200;
+                  $status = false;
                 }
               } catch (\Throwable $th) {
                 $message ='you did something wrong';
@@ -151,7 +157,7 @@ class PostController extends Controller
                 $message ='you have do not have access to this endpoint';
                 $code = 403;
                 $status = false;
-                $role->res($message, $code, $status);   
+                $role->res($message, $code, $status);
             }
            }
 
@@ -161,12 +167,12 @@ class PostController extends Controller
                 $message = count($role->all());
                $code = 200;
                $status = true;
-               $role->res($message, $code, $status); 
+               $role->res($message, $code, $status);
             }else{
                 $message ='you have do not have access to this endpoint';
                 $code = 403;
                 $status = false;
-                $role->res($message, $code, $status); 
+                $role->res($message, $code, $status);
             }
            }
 
@@ -181,7 +187,7 @@ class PostController extends Controller
                 $message ='you have do not have access to this endpoint';
                 $code = 403;
                 $status = false;
-                $user->res($message, $code, $status); 
+                $user->res($message, $code, $status);
             }
            }
 
@@ -201,7 +207,7 @@ class PostController extends Controller
                 $message ='you have do not have access to this endpoint';
                 $code = 403;
                 $status = false;
-                $user->res($message, $code, $status); 
+                $user->res($message, $code, $status);
             }
 
            }
@@ -216,7 +222,7 @@ class PostController extends Controller
                     $message ='you have do not have access to this endpoint';
                     $code = 403;
                     $status = false;
-                    $user->res($message, $code, $status); 
+                    $user->res($message, $code, $status);
                 }
              }
 
@@ -231,10 +237,10 @@ class PostController extends Controller
                     $message ='you have do not have access to this endpoint';
                     $code = 403;
                     $status = false;
-                    $role->res($message, $code, $status); 
+                    $role->res($message, $code, $status);
                 }
              }
-          
+
 
 
 
