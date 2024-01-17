@@ -21,12 +21,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::post("/user/{email}",[PostController::class, 'user_verify']);
+Route::post("/user/{email}",[PostController::class, 'user_verify']);//done
 
 
  Route::controller(PostController::class)->prefix('admin')->group(function(){
-   Route::post('/admin_register', 'admin_register');
-   Route::post('/admin_login', 'admin_login');
+   Route::post('/admin_register', 'admin_register'); //done
+   Route::post('/admin_login', 'admin_login'); // done
  });
 
  Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function () {
@@ -36,7 +36,7 @@ Route::post("/user/{email}",[PostController::class, 'user_verify']);
        Route::controller(PostController::class)->group(function(){
         Route::post('/admin_role_assign', 'admin_role_assign'); //done
         Route::post('/user_verify', 'user_verify');//done
-        Route::get('/employee_search', 'employee_search')->where("search", "[a-zA-Z0-9- ]+");
+        Route::get('/employee_search', 'employee_search')->where("search", "[a-zA-Z0-9- ]+"); //done
         Route::post('/create_job_role', 'create_job_role'); //done
         Route::delete('/delete_job_role', 'delete_job_role');
         Route::get('/retrieve_total_roles', 'retrieve_total_roles');
