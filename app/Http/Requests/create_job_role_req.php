@@ -22,7 +22,7 @@ class create_job_role_req extends FormRequest
     public function rules(): array
     {
         return [
-            'role'=>'required|string'
+            'role'=>'required|unique:roles,role|string'
         ];
     }
 }
