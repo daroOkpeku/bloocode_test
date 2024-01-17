@@ -21,27 +21,27 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::post("/user/{email}",[PostController::class, 'user_verify']);//done
+// Route::post("/user/{email}",[PostController::class, 'user_verify']);//done
 
 
  Route::controller(PostController::class)->prefix('admin')->group(function(){
    Route::post('/admin_register', 'admin_register'); //done
    Route::post('/admin_login', 'admin_login'); // done
+   Route::post('/user_verify', 'user_verify');//done
  });
 
  Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function () {
     // 'create_job_role'
 
-    // Route::post('/create_job_role', [PostController::class, 'create_job_role']);
        Route::controller(PostController::class)->group(function(){
         Route::post('/admin_role_assign', 'admin_role_assign'); //done
-        Route::post('/user_verify', 'user_verify');//done
+
         Route::get('/employee_search', 'employee_search')->where("search", "[a-zA-Z0-9- ]+"); //done
         Route::post('/create_job_role', 'create_job_role'); //done
-        Route::delete('/delete_job_role', 'delete_job_role');
-        Route::get('/retrieve_total_roles', 'retrieve_total_roles');
-        Route::get('/retrieve_total_employee', 'retrieve_total_employee');
-        Route::put('/fire_employee', 'fire_employee');
+        Route::delete('/delete_job_role', 'delete_job_role'); //done
+        Route::get('/retrieve_total_roles', 'retrieve_total_roles'); //done
+        Route::get('/retrieve_total_employee', 'retrieve_total_employee');//done
+        Route::put('/fire_employee', 'fire_employee'); // done
         Route::get('/fetch_all_employee', 'fetch_all_employee');
         Route::get('/fetch_all_roles', 'fetch_all_roles');
        });

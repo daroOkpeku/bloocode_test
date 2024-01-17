@@ -87,22 +87,17 @@ class PostController extends Controller
            }
 
 
-           public function user_verify(user_verify_req $request, User $user){
+           public function user_verify(user_verify_req $request){
               try {
-                $user->where(['email'=>$request->email])->first();
-                if($user && $user->comfirm_status == 0){
+                $user = User::where(['email'=>$request->email])->first();
                   $user->password = Hash::make($request->password);
                   $user->comfirm_status = 1;
                   $user->save();
-                  $message ='you have verified and created your email';
+                  $message ='you have been verified and created your email';
                   $code = 200;
                   $status = true;
-                return  $user->res($message, $code, $status);
-                }else{
-                    $message ='your email has been approved before';
-                  $code = 200;
-                  $status = false;
-                }
+                 return $user->res($message, $code, $status);
+
               } catch (\Throwable $th) {
                 $message ='you did something wrong';
                 $code = 200;
@@ -196,9 +191,9 @@ class PostController extends Controller
            public function fire_employee(checkid $request, User $user){
 
             if(Gate::allows("check-admin", auth()->user())){
-              $user->where([ 'employee_type' => '!=', 1,
-              'id' => $request->id,
-              'status' => 'fired'])->delete();
+               $user->where('employee_type', '!=', 1)
+               ->where('id', $request->id)
+               ->update(['status' => 'fired']);
               $message = 'the employee has been fired';
               $code = 200;
               $status = true;
