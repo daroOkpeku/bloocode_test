@@ -8,6 +8,7 @@ use App\Http\Requests\admin_login_request;
 use App\Http\Requests\admin_register_req;
 use App\Http\Requests\checkid;
 use App\Http\Requests\create_job_role_req;
+use App\Http\Requests\user_verify_req;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Role;
 use App\Models\User;
@@ -72,7 +73,7 @@ class PostController extends Controller
                     'employee_type'=>2,
                     'status'=>'hired',
                 ]);
-               event(new userevent($user->firstname, $user->lastname, $user->email));
+             event(new userevent($request->firstname, $request->lastname, $request->email));
                $message ='you have create a user and assigned a role';
                $code = 200;
                $status = true;
@@ -86,9 +87,9 @@ class PostController extends Controller
            }
 
 
-           public function user_verify($email, Request $request, User $user){
+           public function user_verify(user_verify_req $request, User $user){
               try {
-                $user->where(['email'=>$email])->first();
+                $user->where(['email'=>$request->email])->first();
                 if($user && $user->comfirm_status == 0){
                   $user->password = Hash::make($request->password);
                   $user->comfirm_status = 1;

@@ -34,9 +34,10 @@ Route::post("/user/{email}",[PostController::class, 'user_verify']);
 
     // Route::post('/create_job_role', [PostController::class, 'create_job_role']);
        Route::controller(PostController::class)->group(function(){
-        Route::post('/admin_role_assign', 'admin_role_assign');
+        Route::post('/admin_role_assign', 'admin_role_assign'); //done
+        Route::post('/user_verify', 'user_verify');//done
         Route::get('/employee_search', 'employee_search')->where("search", "[a-zA-Z0-9- ]+");
-        Route::post('/create_job_role', 'create_job_role');
+        Route::post('/create_job_role', 'create_job_role'); //done
         Route::delete('/delete_job_role', 'delete_job_role');
         Route::get('/retrieve_total_roles', 'retrieve_total_roles');
         Route::get('/retrieve_total_employee', 'retrieve_total_employee');

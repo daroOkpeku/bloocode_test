@@ -28,6 +28,7 @@ class userlistener
             'lastname'=>$event->lastname,
             'email'=>$event->email
         ];
-        Mail::to($event->email)->send( new Sendemail($data));
+
+         Mail::to($event->email)->send( new Sendemail($data));
     }
 }

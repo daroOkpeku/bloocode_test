@@ -27,7 +27,7 @@ class Sendemail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('support@bloocode.com', 'Komi'),
+            from: new Address('support@dabarmedia.com', 'Komi'),
             subject: 'Welcome',
         );
     }
