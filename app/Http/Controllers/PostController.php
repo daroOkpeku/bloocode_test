@@ -54,12 +54,12 @@ class PostController extends Controller
         $message = $data;
         $code = 200;
         $status = true;
-        $user->res($message, $code, $status);
+       return $user->res($message, $code, $status);
       }else{
         $message ='please enter the correct details';
         $code = 500;
         $status = false;
-        $user->res($message, $code, $status);
+       return $user->res($message, $code, $status);
       }
     }
 
@@ -77,12 +77,12 @@ class PostController extends Controller
                $message ='you have create a user and assigned a role';
                $code = 200;
                $status = true;
-               $user->res($message, $code, $status);
+             return  $user->res($message, $code, $status);
             }else{
                 $message ='you have do not have access to this endpoint';
                 $code = 403;
                 $status = false;
-                $user->res($message, $code, $status);
+             return $user->res($message, $code, $status);
             }
            }
 
@@ -97,7 +97,7 @@ class PostController extends Controller
                   $message ='you have verified and created your email';
                   $code = 200;
                   $status = true;
-                  $user->res($message, $code, $status);
+                return  $user->res($message, $code, $status);
                 }else{
                     $message ='your email has been approved before';
                   $code = 200;
@@ -107,7 +107,7 @@ class PostController extends Controller
                 $message ='you did something wrong';
                 $code = 200;
                 $status = false;
-                $user->res($message, $code, $status);
+               return $user->res($message, $code, $status);
               }
            }
 
@@ -118,12 +118,12 @@ class PostController extends Controller
             $message = $data;
             $code = 200;
             $status = true;
-            $user->res($message, $code, $status);
+          return  $user->res($message, $code, $status);
             }else{
                 $message ='you have do not have access to this endpoint';
                 $code = 403;
                 $status = false;
-                $user->res($message, $code, $status);
+             return   $user->res($message, $code, $status);
             }
            }
 
@@ -137,12 +137,12 @@ class PostController extends Controller
             $message = 'you just created a role';
             $code = 200;
             $status = true;
-            $role->res($message, $code, $status);
+          return  $role->res($message, $code, $status);
             }else{
                 $message ='you have do not have access to this endpoint';
                 $code = 403;
                 $status = false;
-                $role->res($message, $code, $status);
+              return  $role->res($message, $code, $status);
             }
            }
 
@@ -152,12 +152,12 @@ class PostController extends Controller
                $message = 'job role has been deleted';
                $code = 200;
                $status = true;
-               $role->res($message, $code, $status);
+             return  $role->res($message, $code, $status);
             }else{
                 $message ='you have do not have access to this endpoint';
                 $code = 403;
                 $status = false;
-                $role->res($message, $code, $status);
+             return   $role->res($message, $code, $status);
             }
            }
 
@@ -167,12 +167,12 @@ class PostController extends Controller
                 $message = count($role->all());
                $code = 200;
                $status = true;
-               $role->res($message, $code, $status);
+              return $role->res($message, $code, $status);
             }else{
                 $message ='you have do not have access to this endpoint';
                 $code = 403;
                 $status = false;
-                $role->res($message, $code, $status);
+           return  $role->res($message, $code, $status);
             }
            }
 
@@ -182,12 +182,12 @@ class PostController extends Controller
                 $message = count($user->all());
                 $code = 200;
                 $status = true;
-                $user->res($message, $code, $status);
+            return   $user->res($message, $code, $status);
             }else{
                 $message ='you have do not have access to this endpoint';
                 $code = 403;
                 $status = false;
-                $user->res($message, $code, $status);
+            return   $user->res($message, $code, $status);
             }
            }
 
@@ -202,12 +202,12 @@ class PostController extends Controller
               $message = 'the employee has been fired';
               $code = 200;
               $status = true;
-              $user->res($message, $code, $status);
+          return  $user->res($message, $code, $status);
             }else{
                 $message ='you have do not have access to this endpoint';
                 $code = 403;
                 $status = false;
-                $user->res($message, $code, $status);
+              return  $user->res($message, $code, $status);
             }
 
            }
@@ -217,12 +217,12 @@ class PostController extends Controller
                     $message =count($user->all());
                     $code = 200;
                     $status = true;
-                    $user->res($message, $code, $status);
+                 return   $user->res($message, $code, $status);
                 }else{
                     $message ='you have do not have access to this endpoint';
                     $code = 403;
                     $status = false;
-                    $user->res($message, $code, $status);
+                 return   $user->res($message, $code, $status);
                 }
              }
 
@@ -232,12 +232,12 @@ class PostController extends Controller
                     $message =$role->all();
                     $code = 200;
                     $status = true;
-                    $role->res($message, $code, $status);
+                 return   $role->res($message, $code, $status);
                 }else{
                     $message ='you have do not have access to this endpoint';
                     $code = 403;
                     $status = false;
-                    $role->res($message, $code, $status);
+                 return   $role->res($message, $code, $status);
                 }
              }
 
