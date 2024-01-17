@@ -33,12 +33,12 @@ class PostController extends Controller
         $message ='you have succefully registered';
         $code = 200;
         $status = true;
-        $user->res($message, $code, $status);
+      return  $user->res($message, $code, $status);
        }else{
         $message ='please enter the correct details';
         $code = 500;
         $status = false;
-        $user->res($message, $code, $status);
+       return $user->res($message, $code, $status);
        }
 
     }
