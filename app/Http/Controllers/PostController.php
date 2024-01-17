@@ -8,12 +8,11 @@ use App\Http\Requests\admin_login_request;
 use App\Http\Requests\admin_register_req;
 use App\Http\Requests\checkid;
 use App\Http\Requests\create_job_role_req;
-use App\Models\deletedjobs;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Gate;
 class PostController extends Controller
 {
 
@@ -44,10 +43,10 @@ class PostController extends Controller
     }
 
 
-    public function admin_login(admin_login_request $request, User $user){
-      $user->where(['email'=>$request])->first();
-      if($user && Hash::check($request->password, $user->password)){
-        $token =  $user->createToken('my-app-token')->plainTextToken;
+    public function admin_login(admin_login_request $request){
+        $user = User::where('email', $request->email)->first();
+        if ($user && Hash::check($request->password, $user->password)) {
+            $token = $user->createToken('my-app-token')->plainTextToken;
         $user->api_token = $token;
         $user->save();
         $data =['token'=>$token, 'firstname'=>$user->firstname, 'lastname'=>$user->lastname, 'email'=>$user->email, 'role'=>$user->employee_type, 'id'=>$user->id ];
