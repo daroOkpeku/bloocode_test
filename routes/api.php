@@ -29,18 +29,20 @@ Route::post("/user/{email}",[PostController::class, 'user_verify']);
    Route::post('/admin_login', 'admin_login');
  });
 
- Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function(){
+ Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function () {
+    // 'create_job_role'
 
-       Route::controller(PostController::class)->prefix('admin')->group(function(){
-        Route::post('/admin_role_assign', 'admin_role_assign');
-        Route::get('/employee_search', 'employee_search')->where("search", "[a-zA-Z0-9- ]+");
-        Route::post('/create_job_role', 'create_job_role');
-        Route::delete('/delete_job_role', 'delete_job_role');
-        Route::get('/retrieve_total_roles', 'retrieve_total_roles');
-        Route::get('/retrieve_total_employee', 'retrieve_total_employee');
-        Route::put('/fire_employee', 'fire_employee');
-        Route::get('/fetch_all_employee', 'fetch_all_employee');
-        Route::get('/fetch_all_roles', 'fetch_all_roles');
-       });
+    Route::post('/create_job_role', [PostController::class, 'create_job_role']);
+    //    Route::controller(PostController::class)->group(function(){
+    //     Route::post('/admin_role_assign', 'admin_role_assign');
+    //     Route::get('/employee_search', 'employee_search')->where("search", "[a-zA-Z0-9- ]+");
+    //     Route::post('/create_job_role', 'create_job_role');
+    //     Route::delete('/delete_job_role', 'delete_job_role');
+    //     Route::get('/retrieve_total_roles', 'retrieve_total_roles');
+    //     Route::get('/retrieve_total_employee', 'retrieve_total_employee');
+    //     Route::put('/fire_employee', 'fire_employee');
+    //     Route::get('/fetch_all_employee', 'fetch_all_employee');
+    //     Route::get('/fetch_all_roles', 'fetch_all_roles');
+    //    });
  });
 
